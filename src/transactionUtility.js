@@ -1,48 +1,33 @@
 const fs = require("fs");
 const utils = require("./utils");
 
-const updateEntry = function(entry, beverageEntry, time) {
-	const empId = beverageEntry["--empId"];
-	const beverage = beverageEntry["--beverage"];
-	const quantity = +beverageEntry["--qty"];
-	if (!entry.hasOwnProperty(empId)) {
-		entry[empId] = {
-			empId: +empId,
-			orders: [],
-			beverageCount: 0,
-		};
-	}
+const saveBeverageEntry = function(empBeverageRecords, beverageEntry, time) {
+  const empId = beverageEntry["empId"];
+  const beverage = beverageEntry["beverage"];
+  const quantity = +beverageEntry["qty"];
+  if (!empBeverageRecords.hasOwnProperty(empId)) {
+    empBeverageRecords[empId] = {
+      empId: +empId,
+      orders: [],
+      beverageCount: 0
+    };
+  }
+  empBeverageRecords[empId].orders.push({ beverage, quantity, time });
+  empBeverageRecords[empId].beverageCount += quantity;
 
-	entry[empId].orders.push({ beverage, quantity, time });
-	entry[empId].beverageCount += quantity;
-
-	return entry;
+  return { empBeverageRecords, beverageEntry };
 };
 
-const saveBeverageEntry = function(
-	beverageEntry,
-	fileName,
-	readFileFunc,
-	time
-) {
-	const lastEntry = JSON.parse(
-		utils.readFile(fileName, readFileFunc, fs.existsSync)
-	);
-	const updatedEntry = updateEntry(lastEntry, beverageEntry, time);
-	utils.updateTransaction(updatedEntry, fileName);
-	return utils.createConfirmMessage(beverageEntry, time);
-};
-
-const queryBeverageEntry = function(beverageEntry, fileName, readFileFunc) {
-	const empId = beverageEntry["--empId"];
-	const empBeverageRecords = JSON.parse(
-		utils.readFile(fileName, readFileFunc, fs.existsSync)
-	);
-	const noOfBaverageConsumed = empBeverageRecords[empId].beverageCount;
-	const beveragesConsumed = empBeverageRecords[empId].orders;
-	return utils.formatOutputData(empId, beveragesConsumed, noOfBaverageConsumed);
+const queryBeverageEntry = function(empBeverageRecords, beverageEntry) {
+  const empId = beverageEntry["empId"];
+  let beveragesConsumed = [];
+  let noOfBeverageConsumed = 0;
+  if (empBeverageRecords.hasOwnProperty(empId)) {
+    noOfBeverageConsumed = empBeverageRecords[empId].beverageCount;
+    beveragesConsumed = empBeverageRecords[empId].orders;
+  }
+  return { empId, beveragesConsumed, noOfBeverageConsumed };
 };
 
 exports.save = saveBeverageEntry;
 exports.query = queryBeverageEntry;
-exports.updateEntry = updateEntry;

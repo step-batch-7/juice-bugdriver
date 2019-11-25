@@ -1,26 +1,36 @@
 const tranctionUtility = require("./transactionUtility");
 const utils = require("./utils");
 const fs = require("fs");
+const parseInput = require("./parseInput").parseInput;
 
-const getDesiredEntryFormat = function(empBeverageEntry) {
-	const beverageEntry = {};
-	for (let index = 1; index < empBeverageEntry.length; index += 2) {
-		beverageEntry[empBeverageEntry[index]] = empBeverageEntry[index + 1];
-	}
-	return beverageEntry;
-};
-
-const performTransaction = function(empBeverageEntry) {
-	const transactionType = empBeverageEntry[0].slice(2);
-	const beverageEntry = getDesiredEntryFormat(empBeverageEntry);
-	const transactionPerformer = tranctionUtility[transactionType];
-	const fileName = utils.getDataFileName();
-	return transactionPerformer(
-		beverageEntry,
-		fileName,
-		fs.readFileSync,
-		new Date()
-	);
+const performTransaction = function(
+  empBeverageEntry,
+  readerFunc,
+  existFileFunc
+) {
+  const beverageEntry = parseInput(empBeverageEntry);
+  const transactionType = beverageEntry.command;
+  const transactionPerformer = tranctionUtility[transactionType];
+  const fileName = utils.getDataFileName();
+  const currentTime = new Date();
+  const empBeverageRecords = utils.getTransactions(
+    fileName,
+    readerFunc,
+    existFileFunc
+  );
+  const transactionResponse = transactionPerformer(
+    empBeverageRecords,
+    beverageEntry,
+    currentTime
+  );
+  if (transactionType == "save") {
+    utils.updateTransaction(transactionResponse.empBeverageRecords, fileName);
+    return utils.createConfirmMessage(
+      transactionResponse.beverageEntry,
+      currentTime
+    );
+  }
+  return utils.formatOutputData(transactionResponse);
 };
 
 exports.performTransaction = performTransaction;

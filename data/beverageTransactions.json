@@ -1,45 +1,50 @@
 {
-  "25323": {
-    "empId": 25323,
-    "orders": [
-      {
-        "beverage": "orange",
-        "quantity": 1,
-        "time": "2019-11-27T13:50:48.699Z"
-      },
-      {
-        "beverage": "orange",
-        "quantity": 2,
-        "time": "2019-11-26T13:50:52.246Z"
-      }
-    ],
-    "beverageCount": 3
-  },
-  "25325": {
-    "empId": 25325,
-    "orders": [
-      {
-        "beverage": "grapes",
-        "quantity": 2,
-        "time": "2019-11-28T13:51:02.241Z"
-      }
-    ],
-    "beverageCount": 2
-  },
-  "25326": {
-    "empId": 25326,
-    "orders": [
-      {
-        "beverage": "watermelon",
-        "quantity": 1,
-        "time": "2019-11-27T05:11:48.307Z"
-      },
-      {
-        "beverage": "watermelon",
-        "quantity": 1,
-        "time": "2019-11-27T05:42:59.746Z"
-      }
-    ],
-    "beverageCount": 2
-  }
+	"25323": {
+		"empId": 25323,
+		"orders": [
+			{
+				"beverage": "orange",
+				"quantity": 1,
+				"time": "2019-11-27T13:50:48.699Z"
+			},
+			{
+				"beverage": "orange",
+				"quantity": 2,
+				"time": "2019-11-26T13:50:52.246Z"
+			}
+		],
+		"beverageCount": 3
+	},
+	"25325": {
+		"empId": 25325,
+		"orders": [
+			{
+				"beverage": "grapes",
+				"quantity": 2,
+				"time": "2019-11-28T13:51:02.241Z"
+			}
+		],
+		"beverageCount": 2
+	},
+	"25326": {
+		"empId": 25326,
+		"orders": [
+			{
+				"beverage": "watermelon",
+				"quantity": 1,
+				"time": "2019-11-27T05:11:48.307Z"
+			},
+			{
+				"beverage": "watermelon",
+				"quantity": 1,
+				"time": "2019-11-27T05:42:59.746Z"
+			},
+			{
+				"beverage": "watermelon",
+				"quantity": 1,
+				"time": "2019-11-27T07:32:39.472Z"
+			}
+		],
+		"beverageCount": 3
+	}
 }

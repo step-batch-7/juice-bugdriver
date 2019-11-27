@@ -1,7 +1,3 @@
-const isValidCommand = function(command) {
-	return ["save", "query"].includes(command);
-};
-
 const isValidBeverage = function(beverage) {
 	return beverage != "";
 };
@@ -37,13 +33,17 @@ const isValidOptions = function(options) {
 	};
 	if (Object.keys(validOptions).includes(options["command"])) {
 		const optionEntries = Object.entries(options).slice(1);
-		return optionEntries.every(function(optionArgument) {
-			let userOption = optionArgument[0];
-			return (
-				validOptions[options["command"]].includes(userOption) &&
-				isValidArgument(optionArgument)
-			);
-		});
+		const optionEntriesNotEmpty = optionEntries.length != 0;
+		return (
+			optionEntriesNotEmpty &&
+			optionEntries.every(function(optionArgument) {
+				let userOption = optionArgument[0];
+				return (
+					validOptions[options["command"]].includes(userOption) &&
+					isValidArgument(optionArgument)
+				);
+			})
+		);
 	}
 	return false;
 };
@@ -51,8 +51,7 @@ const isValidOptions = function(options) {
 const parseInput = function(empBeverageEntry) {
 	const beverageEntry = { command: empBeverageEntry[0].slice(2) };
 	for (let index = 1; index < empBeverageEntry.length; index += 2) {
-		beverageEntry[empBeverageEntry[index].slice(2)] =
-			empBeverageEntry[index + 1];
+		beverageEntry[empBeverageEntry[index].slice(2)] = empBeverageEntry[index + 1];
 	}
 	const ValidOptions = isValidOptions(beverageEntry);
 	return { ValidOptions, beverageEntry };

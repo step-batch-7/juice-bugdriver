@@ -29,11 +29,11 @@ describe("read data from given filePath", function() {
     };
     const readFile = function(path, format) {
       if (path == "somepath") {
-        return '{ "key": "somecontent" }';
+        return '[{ "key": "somecontent" }]';
       }
     };
     const actual = utils.getTransactions("somepath", readFile, existFile);
-    const expected = { key: "somecontent" };
+    const expected = [{ key: "somecontent" }];
     assert.deepStrictEqual(actual, expected);
   });
 
@@ -44,10 +44,10 @@ describe("read data from given filePath", function() {
     };
     const readFile = function(path, format) {
       assert.strictEqual(path, "somepath");
-      return "{}";
+      return "[]";
     };
     const actual = utils.getTransactions("somepath", readFile, existFile);
-    const expected = {};
+    const expected = [];
     assert.deepStrictEqual(actual, expected);
   });
 });

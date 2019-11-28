@@ -10,7 +10,7 @@ const updateTransaction = function(data, filePath) {
 };
 
 const getTransactions = function(filePath, readFileFunc, existsSync) {
-  let fileLines = "{}";
+  let fileLines = "[]";
   if (existsSync(filePath)) {
     fileLines = readFileFunc(filePath, "utf8");
   }

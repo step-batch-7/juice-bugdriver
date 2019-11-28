@@ -1,6 +1,5 @@
 const tranctionUtility = require("./transactionUtility");
 const utils = require("./utils");
-const fs = require("fs");
 const parseInput = require("./parseInput").parseInput;
 
 const performTransaction = function(

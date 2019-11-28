@@ -18,16 +18,11 @@ const getTransactions = function(filePath, readFileFunc, existsSync) {
 };
 
 const createConfirmMessage = function(beverageEntry, time) {
-  let confirmationMessage = "Transaction Recorded:\n";
-  confirmationMessage += "Employee ID,Beverage,Quantity,Date\n";
-  confirmationMessage +=
-    beverageEntry["empId"] +
-    "," +
-    beverageEntry["beverage"] +
-    "," +
-    beverageEntry["qty"] +
-    "," +
-    time.toJSON();
+  let confirmationMessage =
+    `Transaction Recorded:\nEmployee ID,Beverage,Quantity,Date\n` +
+    `${beverageEntry["empId"]},${beverageEntry["beverage"]},${
+      beverageEntry["qty"]
+    },${time.toJSON()}`;
   return confirmationMessage;
 };
 
@@ -35,17 +30,10 @@ const formatOutputData = function(transactionResponse) {
   let queryResult = "Employee ID, Beverage, Quantity, Date\n";
   for (let beverageEntry of transactionResponse.selectedRecords) {
     queryResult +=
-      beverageEntry["empId"] +
-      "," +
-      beverageEntry["beverage"] +
-      "," +
-      beverageEntry["quantity"] +
-      "," +
-      beverageEntry["time"] +
-      "\n";
+      `${beverageEntry["empId"]},${beverageEntry["beverage"]},` +
+      `${beverageEntry["quantity"]},${beverageEntry["time"]}\n`;
   }
-  queryResult +=
-    "Total: " + transactionResponse.noOfBeverageConsumed + " Juices";
+  queryResult += `Total: ${transactionResponse.noOfBeverageConsumed} Juices`;
   return queryResult;
 };
 

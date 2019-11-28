@@ -24,7 +24,7 @@ describe("parseInput", function() {
     };
     assert.deepStrictEqual(actual, expected);
   });
-  it("should give ValidOptions false if options are not valid", function() {
+  it("should validate if options are not valid", function() {
     const cmdArgs = [
       "--sav",
       "--beverag",
@@ -46,7 +46,7 @@ describe("parseInput", function() {
     };
     assert.deepStrictEqual(actual, expected);
   });
-  it("should give ValidOptions false quantity is not valid", function() {
+  it("should validate if quantity is not valid", function() {
     const cmdArgs = [
       "--save",
       "--beverage",
@@ -69,7 +69,7 @@ describe("parseInput", function() {
     assert.deepStrictEqual(actual, expected);
   });
 
-  it("should give ValidOptions false if empId is not valid", function() {
+  it("should validate if empId is not valid", function() {
     const cmdArgs = [
       "--save",
       "--beverage",
@@ -92,7 +92,7 @@ describe("parseInput", function() {
     assert.deepStrictEqual(actual, expected);
   });
 
-  it("should give ValidOptions false if date is not valid", function() {
+  it("should validate if date is not valid", function() {
     const cmdArgs = ["--query", "--date", "2019-11-45"];
     const actual = parseInput.parseInput(cmdArgs);
     const expected = {
@@ -105,7 +105,7 @@ describe("parseInput", function() {
     assert.deepStrictEqual(actual, expected);
   });
 
-  it("should give ValidOptions query option is not valid", function() {
+  it("should validate if query option is not valid", function() {
     const cmdArgs = ["--query", "--empI", "23f"];
     const actual = parseInput.parseInput(cmdArgs);
     const expected = {

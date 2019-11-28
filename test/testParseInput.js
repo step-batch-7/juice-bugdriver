@@ -3,7 +3,15 @@ const assert = require("assert");
 
 describe("parseInput", function() {
 	it("should parse Given cmdArg into object and say if cmdArgs are valid", function() {
-		const cmdArgs = ["--save", "--beverage", "orange", "--empId", "32452", "--qty", "3"];
+		const cmdArgs = [
+			"--save",
+			"--beverage",
+			"orange",
+			"--empId",
+			"32452",
+			"--qty",
+			"3",
+		];
 		const actual = parseInput.parseInput(cmdArgs);
 		const expected = {
 			ValidOptions: true,
@@ -17,7 +25,15 @@ describe("parseInput", function() {
 		assert.deepStrictEqual(actual, expected);
 	});
 	it("should work if options are not valid", function() {
-		const cmdArgs = ["--sav", "--beverag", "orange", "--empId", "32452", "--qty", "3"];
+		const cmdArgs = [
+			"--sav",
+			"--beverag",
+			"orange",
+			"--empId",
+			"32452",
+			"--qty",
+			"3",
+		];
 		const actual = parseInput.parseInput(cmdArgs);
 		const expected = {
 			ValidOptions: false,
@@ -31,7 +47,15 @@ describe("parseInput", function() {
 		assert.deepStrictEqual(actual, expected);
 	});
 	it("should work if quantity is not valid", function() {
-		const cmdArgs = ["--save", "--beverage", "orange", "--empId", "32452", "--qty", "3s"];
+		const cmdArgs = [
+			"--save",
+			"--beverage",
+			"orange",
+			"--empId",
+			"32452",
+			"--qty",
+			"3s",
+		];
 		const actual = parseInput.parseInput(cmdArgs);
 		const expected = {
 			ValidOptions: false,
@@ -46,7 +70,15 @@ describe("parseInput", function() {
 	});
 
 	it("should work if empId is not valid", function() {
-		const cmdArgs = ["--save", "--beverage", "orange", "--empId", "324s", "--qty", "3s"];
+		const cmdArgs = [
+			"--save",
+			"--beverage",
+			"orange",
+			"--empId",
+			"324s",
+			"--qty",
+			"3s",
+		];
 		const actual = parseInput.parseInput(cmdArgs);
 		const expected = {
 			ValidOptions: false,

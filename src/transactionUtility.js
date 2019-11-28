@@ -36,22 +36,26 @@ const saveBeverageEntry = function(empBeverageRecords, beverageEntry, time) {
 	return { empBeverageRecords, beverageEntry };
 };
 
-const recordsHaving = function(employeeId, time) {
+const recordsHaving = function(employeeId, time, beverage) {
 	return function(beverageRecord) {
 		const empId = employeeId || beverageRecord["empId"];
-		date = time || beverageRecord["time"];
+		const date = time || beverageRecord["time"];
+		const usrBeverage = beverage || beverageRecord["beverage"];
 		const desiredDate = new Date(date).toLocaleDateString();
 		const actualDate = new Date(beverageRecord["time"]).toLocaleDateString();
 		const validEmpId = empId === beverageRecord.empId;
 		const validDate = desiredDate === actualDate;
-		return validEmpId && validDate;
+		const validBeverage = usrBeverage === beverageRecord.beverage;
+		return validEmpId && validDate && validBeverage;
 	};
 };
 
 const queryBeverageEntry = function(empBeverageRecords, queryData) {
 	const beverageRecordList = getBeverageRecordList(empBeverageRecords);
-	const { empId, date } = queryData;
-	const selectedRecords = beverageRecordList.filter(recordsHaving(empId, date));
+	const { empId, date, beverage } = queryData;
+	const selectedRecords = beverageRecordList.filter(
+		recordsHaving(empId, date, beverage)
+	);
 	const noOfBeverageConsumed = selectedRecords.reduce(function(
 		totalQuantity,
 		record

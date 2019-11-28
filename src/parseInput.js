@@ -29,7 +29,7 @@ const isValidArgument = function(optionArgumentPair) {
 const isValidOptions = function(options) {
 	const validOptions = {
 		save: ["beverage", "empId", "qty"],
-		query: ["empId", "date"],
+		query: ["empId", "date", "beverage"],
 	};
 	if (Object.keys(validOptions).includes(options["command"])) {
 		const optionEntries = Object.entries(options).slice(1);
@@ -51,7 +51,8 @@ const isValidOptions = function(options) {
 const parseInput = function(empBeverageEntry) {
 	const beverageEntry = { command: empBeverageEntry[0].slice(2) };
 	for (let index = 1; index < empBeverageEntry.length; index += 2) {
-		beverageEntry[empBeverageEntry[index].slice(2)] = empBeverageEntry[index + 1];
+		beverageEntry[empBeverageEntry[index].slice(2)] =
+			empBeverageEntry[index + 1];
 	}
 	const ValidOptions = isValidOptions(beverageEntry);
 	return { ValidOptions, beverageEntry };

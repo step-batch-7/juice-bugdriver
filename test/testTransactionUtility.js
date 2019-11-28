@@ -76,7 +76,9 @@ describe("queryBeverageEntry", function() {
 		const beverageEntry = { empId: "1111" };
 		const actual = transactionUtility.query(empBeverageRecords, beverageEntry);
 		const expected = {
-			selectedRecords: [{ empId: "1111", beverage: "orange", quantity: 1, time: time }],
+			selectedRecords: [
+				{ empId: "1111", beverage: "orange", quantity: 1, time: time },
+			],
 			noOfBeverageConsumed: 1,
 		};
 		assert.deepStrictEqual(actual, expected);

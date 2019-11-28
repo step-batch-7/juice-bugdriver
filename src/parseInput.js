@@ -26,6 +26,13 @@ const isValidArgument = function(optionArgumentPair) {
   return optionValidators[option](argument);
 };
 
+const isInValidArgumetLength = function(arguments) {
+  if (arguments["command"] === "save") {
+    return Object.keys(arguments).length == 4;
+  }
+  return Object.keys(arguments).length > 1;
+};
+
 const isValidOptions = function(options) {
   const validOptions = {
     save: ["beverage", "empId", "qty"],
@@ -33,9 +40,9 @@ const isValidOptions = function(options) {
   };
   if (Object.keys(validOptions).includes(options["command"])) {
     const optionEntries = Object.entries(options).slice(1);
-    const optionEntriesNotEmpty = optionEntries.length != 0;
+    const optionLengthInvalid = isInValidArgumetLength(options);
     return (
-      optionEntriesNotEmpty &&
+      optionLengthInvalid &&
       optionEntries.every(function(optionArgument) {
         let userOption = optionArgument[0];
         return (

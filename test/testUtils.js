@@ -1,5 +1,5 @@
 const utils = require("../src/utils");
-const assert = require("assert");
+const assert = require("chai").assert;
 const fs = require("fs");
 
 describe("give path of file having beverage data", function() {

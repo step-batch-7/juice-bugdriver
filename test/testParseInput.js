@@ -1,5 +1,5 @@
 const parseInput = require("../src/parseInput");
-const assert = require("assert");
+const assert = require("chai").assert;
 
 describe("parseInput", function() {
   it("should parse Given cmdArg into object and say if cmdArgs are valid", function() {

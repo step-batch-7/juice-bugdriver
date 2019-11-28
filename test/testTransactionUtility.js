@@ -1,5 +1,5 @@
 const transactionUtility = require("../src/transactionUtility");
-const assert = require("assert");
+const assert = require("chai").assert;
 const fs = require("fs");
 
 describe("update transactionRecord with latest entry given", function() {

@@ -11,12 +11,14 @@ describe("give path of file having beverage data", function() {
 
 describe("write data into given file path", function() {
   it("should write given data into file path", function() {
-    const testData = { name: "something" };
-    const testFilePath = "./testfile";
-    utils.updateTransaction(testData, testFilePath);
-    const actualData = fs.readFileSync(testFilePath, "utf8");
-    assert.strictEqual(actualData, '{\n  "name": "something"\n}');
-    fs.unlinkSync(testFilePath);
+    const writeFile = function(path, data, encoding) {
+      assert.equal(path, "somepath");
+      assert.equal(data, '"somedata"');
+      assert.equal(encoding, "utf8");
+    };
+    const helperFunc = { writeFile: writeFile };
+    const actual = utils.updateTransaction("somedata", "somepath", helperFunc);
+    assert.isUndefined(actual);
   });
 });
 
@@ -32,7 +34,8 @@ describe("read data from given filePath", function() {
         return '[{ "key": "somecontent" }]';
       }
     };
-    const actual = utils.getTransactions("somepath", readFile, existFile);
+    const helperFunc = { readFile: readFile, existsFile: existFile };
+    const actual = utils.getTransactions("somepath", helperFunc);
     const expected = [{ key: "somecontent" }];
     assert.deepStrictEqual(actual, expected);
   });
@@ -46,7 +49,8 @@ describe("read data from given filePath", function() {
       assert.strictEqual(path, "somepath");
       return "[]";
     };
-    const actual = utils.getTransactions("somepath", readFile, existFile);
+    const helperFunc = { readFile: readFile, existsFile: existFile };
+    const actual = utils.getTransactions("somepath", helperFunc);
     const expected = [];
     assert.deepStrictEqual(actual, expected);
   });

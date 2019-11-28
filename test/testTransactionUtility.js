@@ -1,9 +1,8 @@
-const transactionUtility = require("../src/transactionUtility");
 const assert = require("chai").assert;
-const fs = require("fs");
+const transactionUtility = require("../src/transactionUtility");
+const utils = require("../src/utils");
 
 describe("saveBeverageEntry", function() {
-  const time = new Date("2019-11-25T19:25:19.474Z");
   it("should update empty object with given entry", function() {
     const beverageEntry = {
       empId: "1111",
@@ -12,7 +11,12 @@ describe("saveBeverageEntry", function() {
     };
     const expected = {
       empBeverageRecords: [
-        { empId: "1111", beverage: "orange", quantity: 1, time: time },
+        {
+          empId: "1111",
+          beverage: "orange",
+          quantity: 1,
+          time: "2019-11-25T19:25:19.474Z",
+        },
       ],
       beverageEntry: {
         empId: "1111",
@@ -20,7 +24,9 @@ describe("saveBeverageEntry", function() {
         qty: "1",
       },
     };
-    const actual = transactionUtility.save([], beverageEntry, time);
+    const getTime = () => new Date("2019-11-25T19:25:19.474Z");
+    const helperFunc = { timeStamp: getTime };
+    const actual = transactionUtility.save([], beverageEntry, helperFunc);
     assert.deepStrictEqual(actual, expected);
   });
 
@@ -31,12 +37,27 @@ describe("saveBeverageEntry", function() {
       qty: "1",
     };
     const lastObject = [
-      { empId: "1111", beverage: "orange", quantity: 1, time: time },
+      {
+        empId: "1111",
+        beverage: "orange",
+        quantity: 1,
+        time: "2019-11-25T19:25:19.474Z",
+      },
     ];
     const expected = {
       empBeverageRecords: [
-        { empId: "1111", beverage: "orange", quantity: 1, time: time },
-        { empId: "1111", beverage: "banana", quantity: 1, time: time },
+        {
+          empId: "1111",
+          beverage: "orange",
+          quantity: 1,
+          time: "2019-11-25T19:25:19.474Z",
+        },
+        {
+          empId: "1111",
+          beverage: "banana",
+          quantity: 1,
+          time: "2019-11-25T19:25:19.474Z",
+        },
       ],
       beverageEntry: {
         empId: "1111",
@@ -44,7 +65,13 @@ describe("saveBeverageEntry", function() {
         qty: "1",
       },
     };
-    const actual = transactionUtility.save(lastObject, beverageEntry, time);
+    const getTime = () => new Date("2019-11-25T19:25:19.474Z");
+    const helperFunc = { timeStamp: getTime };
+    const actual = transactionUtility.save(
+      lastObject,
+      beverageEntry,
+      helperFunc
+    );
     assert.deepStrictEqual(actual, expected);
   });
 });

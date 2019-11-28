@@ -30,10 +30,11 @@ const recordsHaving = function(employeeId, time, beverage) {
   };
 };
 
-const saveBeverageEntry = function(empBeverageRecords, beverageEntry, time) {
+const saveBeverageEntry = function(empBeverageRecords, beverageEntry, funcs) {
   const empId = beverageEntry["empId"];
   const beverage = beverageEntry["beverage"];
   const quantity = +beverageEntry["qty"];
+  const time = funcs.timeStamp().toJSON();
   empBeverageRecords.push({ empId, beverage, quantity, time });
   return { empBeverageRecords, beverageEntry };
 };

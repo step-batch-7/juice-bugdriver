@@ -2,11 +2,7 @@ const tranctionUtility = require("./transactionUtility");
 const utils = require("./utils");
 const parseInput = require("./parseInput").parseInput;
 
-const performTransaction = function(
-  empBeverageEntry,
-  readerFunc,
-  existFileFunc
-) {
+const performTransaction = function(empBeverageEntry, helperFuncs) {
   const { ValidOptions, beverageEntry } = parseInput(empBeverageEntry);
   if (!ValidOptions) {
     return "Not Valid Input";
@@ -14,22 +10,21 @@ const performTransaction = function(
   const transactionType = beverageEntry.command;
   const transactionPerformer = tranctionUtility[transactionType];
   const fileName = utils.getDataFileName();
-  const currentTime = new Date();
-  const empBeverageRecords = utils.getTransactions(
-    fileName,
-    readerFunc,
-    existFileFunc
-  );
+  const empBeverageRecords = utils.getTransactions(fileName, helperFuncs);
   const transactionResponse = transactionPerformer(
     empBeverageRecords,
     beverageEntry,
-    currentTime
+    helperFuncs
   );
   if (transactionType == "save") {
-    utils.updateTransaction(transactionResponse.empBeverageRecords, fileName);
+    utils.updateTransaction(
+      transactionResponse.empBeverageRecords,
+      fileName,
+      helperFuncs
+    );
     return utils.createConfirmMessage(
       transactionResponse.beverageEntry,
-      currentTime
+      helperFuncs.timeStamp()
     );
   }
   return utils.formatOutputData(transactionResponse);

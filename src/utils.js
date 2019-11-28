@@ -4,15 +4,15 @@ const getDataFileName = function() {
   return "./data/beverageTransactions.json";
 };
 
-const updateTransaction = function(data, filePath) {
+const updateTransaction = function(data, filePath, helperFuncs) {
   const stringData = JSON.stringify(data, null, 2);
-  fs.writeFileSync(filePath, stringData, "utf8");
+  helperFuncs.writeFile(filePath, stringData, "utf8");
 };
 
-const getTransactions = function(filePath, readFileFunc, existsSync) {
+const getTransactions = function(filePath, helperFuncs) {
   let fileLines = "[]";
-  if (existsSync(filePath)) {
-    fileLines = readFileFunc(filePath, "utf8");
+  if (helperFuncs.existsFile(filePath)) {
+    fileLines = helperFuncs.readFile(filePath, "utf8");
   }
   return JSON.parse(fileLines);
 };

@@ -1,7 +1,10 @@
 const fs = require("fs");
 
 const getDataFileName = function() {
-  return "./data/beverageTransactions.json";
+  return (
+    process.env.JUICE_TRANSACTIONS_STORE_PATH ||
+    "./data/beverageTransactions.json"
+  );
 };
 
 const updateTransaction = function(data, filePath, helperFuncs) {
@@ -31,7 +34,7 @@ const formatOutputData = function(transactionResponse) {
   for (let beverageEntry of transactionResponse.selectedRecords) {
     queryResult +=
       `${beverageEntry["empId"]},${beverageEntry["beverage"]},` +
-      `${beverageEntry["quantity"]},${beverageEntry["time"]}\n`;
+      `${beverageEntry["qty"]},${beverageEntry["date"]}\n`;
   }
   queryResult += `Total: ${transactionResponse.noOfBeverageConsumed} Juices`;
   return queryResult;

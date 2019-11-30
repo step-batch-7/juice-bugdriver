@@ -3,7 +3,7 @@ const utils = require("./utils");
 
 const isEmpIdValid = function(empId, beverageRecord) {
   const employeeId = empId || beverageRecord.empId;
-  return employeeId === beverageRecord.empId;
+  return employeeId == beverageRecord.empId;
 };
 
 const isBeverageValid = function(bev, beverageRecord) {
@@ -12,8 +12,8 @@ const isBeverageValid = function(bev, beverageRecord) {
 };
 
 const isDateValid = function(time, beverageRecord) {
-  const cmdDate = time || beverageRecord.time;
-  const recordDate = new Date(beverageRecord.time);
+  const cmdDate = time || beverageRecord.date;
+  const recordDate = new Date(beverageRecord.date);
   const searchedDate = new Date(cmdDate);
   const validDate = recordDate.getDate() === searchedDate.getDate();
   const validMonth = recordDate.getMonth() === searchedDate.getMonth();
@@ -33,9 +33,9 @@ const recordsHaving = function(employeeId, time, beverage) {
 const saveBeverageEntry = function(empBeverageRecords, beverageEntry, funcs) {
   const empId = beverageEntry["empId"];
   const beverage = beverageEntry["beverage"];
-  const quantity = +beverageEntry["qty"];
-  const time = funcs.timeStamp().toJSON();
-  empBeverageRecords.push({ empId, beverage, quantity, time });
+  const qty = +beverageEntry["qty"];
+  const date = funcs.timeStamp().toJSON();
+  empBeverageRecords.push({ empId, beverage, qty, date });
   return { empBeverageRecords, beverageEntry };
 };
 
@@ -48,7 +48,7 @@ const queryBeverageEntry = function(beverageRecordList, queryData) {
     totalQuantity,
     record
   ) {
-    return totalQuantity + record["quantity"];
+    return totalQuantity + record["qty"];
   },
   0);
   return { selectedRecords, noOfBeverageConsumed };

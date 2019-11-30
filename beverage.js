@@ -4,7 +4,8 @@ const fs = require("fs");
 
 const main = function() {
   const getTime = function() {
-    return new Date();
+    const date = process.env.NOW || new Date().toJSON();
+    return new Date(date);
   };
   const empBeverageEntry = process.argv.slice(2);
   const helperFuncs = {

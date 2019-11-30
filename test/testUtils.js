@@ -1,6 +1,5 @@
 const utils = require("../src/utils");
 const assert = require("chai").assert;
-const fs = require("fs");
 
 describe("give path of file having beverage data", function() {
   it("should give path of file having beverage data", function() {
@@ -74,10 +73,9 @@ describe("give formated confirmation message having beverageEntry and time", fun
 
 describe("give formated output data if someone query for their record by empId", function() {
   it("should give formated output data for given inputs", function() {
-    const empId = 11111;
     const time = new Date("2019-11-25T19:25:19.474Z");
     const selectedRecords = [
-      { empId: 11111, beverage: "orange", quantity: 1, time: time.toJSON() },
+      { empId: 11111, beverage: "orange", qty: 1, date: time.toJSON() },
     ];
     const noOfBeverageConsumed = 1;
     const actualData = utils.formatOutputData({

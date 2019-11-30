@@ -1,6 +1,5 @@
 const assert = require("chai").assert;
 const transactionUtility = require("../src/transactionUtility");
-const utils = require("../src/utils");
 
 describe("saveBeverageEntry", function() {
   it("should update empty object with given entry", function() {
@@ -14,8 +13,8 @@ describe("saveBeverageEntry", function() {
         {
           empId: "1111",
           beverage: "orange",
-          quantity: 1,
-          time: "2019-11-25T19:25:19.474Z",
+          qty: 1,
+          date: "2019-11-25T19:25:19.474Z",
         },
       ],
       beverageEntry: {
@@ -40,8 +39,8 @@ describe("saveBeverageEntry", function() {
       {
         empId: "1111",
         beverage: "orange",
-        quantity: 1,
-        time: "2019-11-25T19:25:19.474Z",
+        qty: 1,
+        date: "2019-11-25T19:25:19.474Z",
       },
     ];
     const expected = {
@@ -49,14 +48,14 @@ describe("saveBeverageEntry", function() {
         {
           empId: "1111",
           beverage: "orange",
-          quantity: 1,
-          time: "2019-11-25T19:25:19.474Z",
+          qty: 1,
+          date: "2019-11-25T19:25:19.474Z",
         },
         {
           empId: "1111",
           beverage: "banana",
-          quantity: 1,
-          time: "2019-11-25T19:25:19.474Z",
+          qty: 1,
+          date: "2019-11-25T19:25:19.474Z",
         },
       ],
       beverageEntry: {
@@ -83,8 +82,8 @@ describe("queryBeverageEntry", function() {
       {
         empId: "1111",
         beverage: "orange",
-        quantity: 1,
-        time: "2019-11-25T10:25:19.474Z",
+        qty: 1,
+        date: "2019-11-25T10:25:19.474Z",
       },
     ];
     const beverageEntry = { empId: "1111" };
@@ -94,8 +93,8 @@ describe("queryBeverageEntry", function() {
         {
           empId: "1111",
           beverage: "orange",
-          quantity: 1,
-          time: "2019-11-25T10:25:19.474Z",
+          qty: 1,
+          date: "2019-11-25T10:25:19.474Z",
         },
       ],
       noOfBeverageConsumed: 1,
@@ -108,14 +107,14 @@ describe("queryBeverageEntry", function() {
       {
         empId: "1111",
         beverage: "orange",
-        quantity: 1,
-        time: "2019-11-25T10:25:19.474Z",
+        qty: 1,
+        date: "2019-11-25T10:25:19.474Z",
       },
       {
         empId: "1111",
         beverage: "banana",
-        quantity: 1,
-        time: "2019-11-26T10:25:19.474Z",
+        qty: 1,
+        date: "2019-11-26T10:25:19.474Z",
       },
     ];
     const beverageEntry = { date: "2019-11-25" };
@@ -125,8 +124,8 @@ describe("queryBeverageEntry", function() {
         {
           empId: "1111",
           beverage: "orange",
-          quantity: 1,
-          time: "2019-11-25T10:25:19.474Z",
+          qty: 1,
+          date: "2019-11-25T10:25:19.474Z",
         },
       ],
       noOfBeverageConsumed: 1,
@@ -150,14 +149,14 @@ describe("queryBeverageEntry", function() {
       {
         empId: "1111",
         beverage: "orange",
-        quantity: 1,
-        time: "2019-11-25T10:25:19.474Z",
+        qty: 1,
+        date: "2019-11-25T10:25:19.474Z",
       },
       {
         empId: "1111",
         beverage: "banana",
-        quantity: 1,
-        time: "2019-11-26T10:25:19.474Z",
+        qty: 1,
+        date: "2019-11-26T10:25:19.474Z",
       },
     ];
     const beverageEntry = { empId: "1111", date: "2019-11-25" };
@@ -167,8 +166,8 @@ describe("queryBeverageEntry", function() {
         {
           empId: "1111",
           beverage: "orange",
-          quantity: 1,
-          time: "2019-11-25T10:25:19.474Z",
+          qty: 1,
+          date: "2019-11-25T10:25:19.474Z",
         },
       ],
       noOfBeverageConsumed: 1,

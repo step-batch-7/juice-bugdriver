@@ -36,7 +36,8 @@ const formatOutputData = function(transactionResponse) {
       `${beverageEntry["empId"]},${beverageEntry["beverage"]},` +
       `${beverageEntry["qty"]},${beverageEntry["date"]}\n`;
   }
-  queryResult += `Total: ${transactionResponse.noOfBeverageConsumed} Juices`;
+  const noOfBev = transactionResponse.noOfBeverageConsumed;
+  queryResult += `Total: ${noOfBev} ${noOfBev == 1 ? "Juice" : "Juices"}`;
   return queryResult;
 };
 

@@ -85,7 +85,7 @@ describe("give formated output data if someone query for their record by empId",
     const expectedData =
       "Employee ID, Beverage, Quantity, Date\n" +
       "11111,orange,1,2019-11-25T19:25:19.474Z" +
-      "\nTotal: 1 Juices";
+      "\nTotal: 1 Juice";
     assert.strictEqual(actualData, expectedData);
   });
 });

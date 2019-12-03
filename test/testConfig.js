@@ -1,4 +1,4 @@
-const assert = require("assert");
+const assert = require("chai").assert;
 const { getDataStorePath, timeStamp } = require("../src/config");
 
 describe("getDataStorePath", function() {

@@ -72,7 +72,7 @@ describe("give formated confirmation message having beverageEntry and time", fun
 });
 
 describe("give formated output data if someone query for their record by empId", function() {
-  it("should give formated output data for given inputs", function() {
+  it("should give formated output data for given inputs if one juice", function() {
     const time = new Date("2019-11-25T19:25:19.474Z");
     const selectedRecords = [
       { empId: 11111, beverage: "orange", qty: 1, date: time.toJSON() },
@@ -86,6 +86,25 @@ describe("give formated output data if someone query for their record by empId",
       "Employee ID, Beverage, Quantity, Date\n" +
       "11111,orange,1,2019-11-25T19:25:19.474Z" +
       "\nTotal: 1 Juice";
+    assert.strictEqual(actualData, expectedData);
+  });
+
+  it("should give formated output data for given inputs if more than one juice", function() {
+    const time = new Date("2019-11-25T19:25:19.474Z");
+    const selectedRecords = [
+      { empId: 11111, beverage: "orange", qty: 1, date: time.toJSON() },
+      { empId: 11111, beverage: "banana", qty: 1, date: time.toJSON() },
+    ];
+    const noOfBeverageConsumed = 2;
+    const actualData = utils.formatOutputData({
+      selectedRecords,
+      noOfBeverageConsumed,
+    });
+    const expectedData =
+      "Employee ID, Beverage, Quantity, Date\n" +
+      "11111,orange,1,2019-11-25T19:25:19.474Z\n" +
+      "11111,banana,1,2019-11-25T19:25:19.474Z" +
+      "\nTotal: 2 Juices";
     assert.strictEqual(actualData, expectedData);
   });
 });

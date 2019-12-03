@@ -16,11 +16,11 @@ describe("getDataStorePath", function() {
 });
 describe("timeStamp", function() {
   it("should give current time by default", function() {
-    assert.deepStrictEqual(timeStamp({}), new Date());
+    assert.deepStrictEqual(timeStamp({})(), new Date());
   });
   it("should give stubbed time from env variable", function() {
     const stubbedDate = new Date("2019-01-01");
     const env = { NOW: stubbedDate.toJSON() };
-    assert.deepStrictEqual(timeStamp(env), stubbedDate);
+    assert.deepStrictEqual(timeStamp(env)(), stubbedDate);
   });
 });
